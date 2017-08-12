@@ -1,25 +1,16 @@
 package com.test.micro;
 
-import java.util.Date;
-import javax.ws.rs.core.Application;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Link;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
-
+import javax.ws.rs.core.*;
+import java.util.Date;
 
 @ApplicationPath("/trivia")
 @Path("")
 public class App extends Application {
-    //    public static void main( String[] args )
-//    {
-//        System.out.println( "Hello World!" );
-//    }
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getDirectory(@Context UriInfo uri) {

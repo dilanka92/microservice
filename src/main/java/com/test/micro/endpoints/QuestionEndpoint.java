@@ -4,19 +4,10 @@ import com.test.micro.modal.Questions;
 import com.test.micro.service.QuestionAccessible;
 import com.test.micro.service.QuestionAccessibleImpl;
 
+import javax.ws.rs.*;
+import javax.ws.rs.core.*;
 import java.util.Date;
 import java.util.List;
-import javax.ws.rs.DefaultValue;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Link;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 
 @Path("/questions")
 final public class QuestionEndpoint {
@@ -28,8 +19,7 @@ final public class QuestionEndpoint {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getQuestions(@Context UriInfo uri,
-                                 @QueryParam("offset") @DefaultValue("0") long offset) {
+    public Response getQuestions(@Context UriInfo uri, @QueryParam("offset") @DefaultValue("0") long offset) {
         // Calculate the effective offset
         long datasetSize = dataAccess.getQuestionListSize();
         long start = offset;
@@ -79,7 +69,6 @@ final public class QuestionEndpoint {
                 .build();
     }
 
-
     @GET
     @Path("count")
     @Produces(MediaType.APPLICATION_JSON)
@@ -95,8 +84,7 @@ final public class QuestionEndpoint {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getQuestion(@Context UriInfo uri,
-                                @PathParam("id") String idString) {
+    public Response getQuestion(@Context UriInfo uri, @PathParam("id") String idString) {
         Response response;
         if (idString.trim().equalsIgnoreCase("random")) {
             Questions question = dataAccess.getRandomQuestion();
